@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>WeeklyPlanner - Main</title>
+        <link rel="stylesheet" href="/static/planner.css">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    </head>
+
+    <body>
+
+        <div class="container-fluid bg-warning">
+            <h1 class="text-center p-5">Weekly Planner V1.0</h1>
+        </div>
+
+        <div class="container-fluid p-3">
+            <table class="table table-light table-bordered border-dark table-striped container">
+                <tr>
+                    {% for header in headings %}
+                    <th class="text-center"> <h4> {{ header }} </h4> </th>
+                    {% endfor %}
+                </tr>
+                {% for row in data %}
+                <tr>
+                    {% for cell in row %}
+                    <td>
+                        {% for item in cell %}
+                         <p class="">{{ item }}</p>
+                        {% endfor %}
+                    </td>
+                    {% endfor %}
+                {% endfor %}
+                </tr>
+            </table>
+        </div>
+
+        <hr/>
+
+        <div class="container">
+            <div class="container m-2">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#addNewShift">
+                  Add New Shift
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="addNewShift" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addNewShiftpLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="addNewShiftpLabel">Add New Shift</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                          <form action="/planner" method="post" class="p-1">
+                              {{shiftform.position_title.label}} {{shiftform.position_title}}
+                              <br><br>
+                              {{shiftform.day_of_Week.label}} {{shiftform.day_of_Week}}
+                              <br><br>
+                              {{shiftform.employee.label}} {{shiftform.employee}}
+                              <br><br>
+                              {{shiftform.start_time.label}} {{shiftform.start_time}}
+                              <br><br>
+                              {{shiftform.end_time.label}} {{shiftform.end_time}}
+                              <br><br>
+                              {{shiftform.pay_rate.label}} {{shiftform.pay_rate}}
+                              <br><br>
+                              {{shiftform.button}}
+                              <br>
+                          </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="container m-2">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#removeNewShift">
+                  Remove Shift
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="removeNewShift" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="removeNewShiftLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="removeNewShiftLabel">Add New Shift</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                          <form action="/planner" method="post" class="p-1">
+                              {{removeform.shift_id.label}} {{removeform.shift_id}}
+                              <br><br>
+                              {{removeform.button}}
+                              <br>
+                          </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    </body>
+
+</html>
